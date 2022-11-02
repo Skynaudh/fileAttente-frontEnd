@@ -1,0 +1,34 @@
+body{
+    margin: 0;
+    background-image: url('./a54951dff58c0b38c04501ced9ab4bdf.jpg');
+    background-position: center;
+    background-size: cover;
+    min-height: 90vh;
+}
+nav{
+    margin: 2%;
+    background: #397eb3;
+    height: 80px;
+  }
+  .span{
+     text-align: center;
+    color: white;
+    font-size: 30px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  .container{
+
+  }
+  .panel-heading{
+    text-align: center;
+  }
+  .panel-body{
+    text-align: center;
+    background: rgb(187, 188, 189);
+    top: 0;
+  color: blue;
+  font-size: 40px;
+    min-height: 100px;
+  }

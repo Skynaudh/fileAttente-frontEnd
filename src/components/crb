@@ -1,0 +1,238 @@
+
+      <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target=".sidebar-collapse"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"
+            ><strong><i class="icon fa fa-plane"></i> Skynaudh7</strong></a
+          >
+
+          <div id="sideNav" href="">
+            <i class="fa fa-bars icon"></i>
+          </div>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+          <li class="dropdown">
+            <a
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              href="#"
+              aria-expanded="false"
+            >
+              <i class="fa fa-envelope fa-fw"></i>
+              <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-messages">
+              <li>
+                <a href="#">
+                  <div>
+                    <strong>Skynaudh</strong>
+                    <span class="pull-right text-muted">
+                      <em>Aujourd'hui...</em>
+                    </span>
+                  </div>
+                  <div>Vous n'avez aucune activitée en cours</div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="#">
+                  <div>
+                    <strong>Administration</strong>
+                    <span class="pull-right text-muted">
+                      <em>Hier...</em>
+                    </span>
+                  </div>
+                  <div>
+                    Réservation annulée pour faute de maintenance. Veillez nous
+                    excuser!!!!!
+                  </div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="#">
+                  <div>
+                    <strong>Skynaudh</strong>
+                    <span class="pull-right text-muted">
+                      <em>Hier...</em>
+                    </span>
+                  </div>
+                  <div>
+                    Validation de reservation confirmée. Rendez-vous prevus pour
+                    le 10/01/2021
+                  </div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a class="text-center" href="#">
+                  <strong>Lire tous les messages...</strong>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+              </li>
+            </ul>
+            <!-- /.dropdown-messages -->
+          </li>
+          <!-- /.dropdown -->
+          <li class="dropdown">
+            <a
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              href="#"
+              aria-expanded="false"
+            >
+              <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-alerts">
+              <li>
+                <a href="#">
+                  <div>
+                    <i class="fa fa-comment fa-fw"></i> New Comment
+                    <span class="pull-right text-muted small">4 min</span>
+                  </div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="#">
+                  <div>
+                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                    <span class="pull-right text-muted small">12 min</span>
+                  </div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="#">
+                  <div>
+                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                    <span class="pull-right text-muted small">4 min</span>
+                  </div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="#">
+                  <div>
+                    <i class="fa fa-tasks fa-fw"></i> New Task
+                    <span class="pull-right text-muted small">4 min</span>
+                  </div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="#">
+                  <div>
+                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                    <span class="pull-right text-muted small">4 min</span>
+                  </div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a class="text-center" href="#">
+                  <strong>See All Alerts</strong>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+              </li>
+            </ul>
+            <!-- /.dropdown-alerts -->
+          </li>
+          <!-- /.dropdown -->
+          <li class="dropdown">
+            <a
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              href="#"
+              aria-expanded="false"
+            >
+              <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li>
+                <a href="#"><i class="fa fa-user fa-fw"></i> Votre Profile</a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-gear fa-fw"></i> Parametres</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <router-link to="/"
+                  ><i class="fa fa-sign-out fa-fw"></i> Déconnexion</router-link
+                >
+              </li>
+            </ul>
+            <!-- /.dropdown-user -->
+          </li>
+          <!-- /.dropdown -->
+        </ul>
+      </nav>
+      <!--/. NAV TOP  -->
+      <nav class="navbar-default navbar-side" role="navigation">
+        <ajoutTypeInst
+          v-bind:visible="visible"
+          v-bind:Ajouter="Ajouter"
+        ></ajoutTypeInst>
+        <modifierTypeInst
+          :nameSend="name"
+          v-bind:revele="revele"
+          v-bind:Modifier="Modifier"
+        ></modifierTypeInst>
+        <suppTypeInst
+          v-bind:show="show"
+          v-bind:Supprimer="Supprimer"
+        ></suppTypeInst>
+        <div class="sidebar-collapse">
+          <ul class="nav" id="main-menu">
+            <li>
+              <a href="#"><i class="fa fa-dashboard"></i> Dashboard</a>
+            </li>
+            <li>
+              <a href="#" class="active-menu"
+                ><i class="fa fa-desktop"></i> Type d'Institutions</a
+              >
+            </li>
+            <li>
+              <router-link to="/institution"
+                ><i class="fa fa-desktop"></i> Institutions</router-link
+              >
+            </li>
+
+            <li>
+              <router-link to="/agence"
+                ><i class="fa fa-sitemap"></i> Agences</router-link
+              >
+            </li>
+
+            <li>
+              <router-link to="/Utilisateur"
+                ><i class="fa fa-user"></i> Utilisateurs</router-link
+              >
+            </li>
+
+            <li>
+              <a href="#"><i class="fa fa-table"></i> Responsive Tables</a>
+            </li>
+            <li>
+              <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
+            </li>
+
+            <li>
+              <a href="empty.html"
+                ><i class="fa fa-fw fa-file"></i> Empty Page</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>

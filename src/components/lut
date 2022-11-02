@@ -1,0 +1,313 @@
+
+<template>
+  <div>
+    <div class="inscrire-body">
+      <div class="inscrire-container">
+        <div class="inscrire-logo">
+          <i class="fa fa-user"></i>
+        </div>
+
+        <div class="inscrire-tab" data-id="connexion">
+          <form v-on:submit.prevent="login()">
+            <div class="row">
+              <i class="fa fa-user"></i>
+              <input
+                type="text"
+                class="input"
+                placeholder="Votre nom d'utilisateur"
+                v-model="username"
+              />
+            </div>
+            <div class="row">
+              <i class="fa fa-lock"></i>
+              <input
+                type="password"
+                class="input"
+                placeholder="Saisissez votre mot de passe"
+                v-model="password"
+              />
+            </div>
+            <a href="#" class="link">Mot de passe oublié</a>
+            <button class="btn">Connexion</button>
+          </form>
+        </div>
+        <!--  <button class="btn btn-primary btn-block">Connexion</button>  -->
+      </div>
+    </div>
+
+    <div class="overlay" v-if="erreur"></div>
+    <transition name="fadeThird">
+      <div v-if="erreur" class="bloc-modale">
+        <div class="popup-contenu">
+          <div class="icon-warning">
+            <i class="fa fa-warning"></i>
+          </div>
+          <div class="title">
+            Connexion Echoué!!!!!
+          </div>
+          <div class="dismiss-btn">
+            <v-btn v-on:click="reessayer()" class="red">
+              Retour
+            </v-btn>
+          </div>
+        </div>
+      </div>
+    </transition>
+  </div>
+</template>
+
+<script>
+  import axios from "axios";
+
+export default {
+  name: "auth",
+  data() {
+    return {
+      username: "",
+      password: "",
+      erreur: false
+    };
+  },
+  methods: {
+    // login() {
+    //   let name = this.username;
+    //   let password = this.password;
+    //   this.$store
+    //     .dispatch("loginAgent", { name, password })
+    //     .then(() => {
+    //       this.$router.push("/dashboard");
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //       this.Erreur();
+    //     });
+    // },
+
+    login() {
+      axios
+        .post("http://192.168.1.100:8000/api/login", {
+          name: this.username,
+          password: this.password
+        })
+        .then(response => {
+            const service = response.data.data.service;
+            localStorage.setItem("service", service);
+          const guichet = response.data.data.guichet;
+          console.log("guichet: "+guichet);
+          if (guichet == null) {
+            this.$router.push("/loginEcran");
+          } else {
+            const institut = response.data.data.information.institution;
+            const agence = response.data.data.information.agence;
+            const role = response.data.data.role;
+            const duree = response.data.data.duree;
+            const dureeSecond = response.data.data.dureeSecond
+            localStorage.setItem("duree", duree)
+            localStorage.setItem("dureeSecond", dureeSecond)
+            const agentGuichet = response.data.data.guichet.name;
+            localStorage.setItem("guichet", agentGuichet);
+            const idAgent = response.data.data.information.agentId;
+            localStorage.setItem("idAgent", idAgent);
+            const name = response.data.data.information.name;
+            const token = response.data.data.token;
+            localStorage.setItem("institut", institut);
+            localStorage.setItem("agence", agence);
+            localStorage.setItem("role", role);
+            localStorage.setItem("name", name);
+            localStorage.setItem("token", token);
+            this.$router.push("/Dashboard");
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          this.Erreur();
+        });
+    },
+    Erreur() {
+      this.erreur = !this.erreur;
+    },
+    reessayer() {
+      (this.username = ""), (this.password = ""), (this.erreur = !this.erreur);
+    }
+  }
+};
+</script>
+
+<style scoped>
+.inscrire-body {
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../assets/image_search_1613158244286.png");
+  background-position: center;
+  background-size: cover;
+  opacity: 0.9;
+  height: 100vh;
+  padding: 1% 10%;
+}
+
+.inscrire-container {
+  position: relative;
+  width: 50%;
+  height: 480px;
+  background-color: wheat;
+  padding: 3%;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.inscrire-logo {
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  box-shadow: 0 5px 5px #ccc;
+  font-size: 1.8em;
+  background-color: #66bbaa;
+  color: #f0f6fb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inscrire-tab {
+  position: relative;
+  height: 350px;
+  padding: 15% 5%;
+  margin-top: 10%;
+  background-color: #fff;
+  color: #82ade6de;
+  box-shadow: 0px 5px 10px #7c8395;
+  border-radius: 30px;
+  font-size: 19px;
+}
+
+.inscrire-tab.active {
+  display: block;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #82ade6de;
+  padding: 4.8% 0;
+  margin: 0px;
+}
+
+.row .input {
+  width: 90%;
+  border: none;
+  outline: none;
+  color: #112136de;
+  font-weight: 550;
+}
+
+.input::placeholder {
+  color: #17db79de;
+}
+
+.link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 18px;
+  width: 100%;
+  text-decoration: none;
+  color: #2b384f;
+  text-align: right;
+}
+.link:hover {
+  text-decoration: underline;
+  color: red;
+}
+
+.btn {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  width: 120px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: #6ba1f9;
+  border: none;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+}
+.bloc-modale {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  top: 5%;
+}
+
+.popup-contenu {
+  background: rgb(243, 180, 180);
+  color: #fff;
+  position: fixed;
+  width: 30%;
+}
+.dismiss-btn {
+  float: right;
+  margin-right: 3px;
+  margin-bottom: 5px;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.icon-warning {
+  margin: 5px 0px;
+  width: 55px;
+  height: 55px;
+  border: 2px solid red;
+  margin-left: 40%;
+  padding: 5px 5px;
+  display: inline-block;
+  border-radius: 50%;
+  line-height: 60px;
+}
+.icon-warning i.fa {
+  font-size: 40px;
+  color: red;
+}
+
+.title {
+  color: rgb(75, 60, 60);
+  top: 0;
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.fadeThird-enter-active {
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.fadeThird-enter {
+  transform: translateY(-100px);
+}
+</style>
+
+
+
+
+
+
+   
